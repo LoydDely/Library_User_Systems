@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using Library_User_Systems.Models
+@model List<ApplicationUser>
+@attribute [Authorize(Roles = "Admin,Staff")]
+
+<h2>User List</h2>
+
+<table class="table">
+	<thead>
+	<tr>
+		<th>Name</th>
+		<th>Email</th>
+		<th>User Type</th>
+		<th>Borrowing Limit</th>
+		<th>Actions</th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var user in Model)
+	{
+		<tr>
+			<td>@user.FullName</td>
+			<td>@user.Email</td>
+			<td>@user.UserType</td>
+			<td>@user.BorrowingLimit</td>
+			<td>
+				<a asp-controller="Users" asp-action="Edit" asp-route-id="@user.Id">Edit</a> |
+				<a asp-controller="Users" asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+			</td>
+		</tr>
+	}
+	</tbody>
+</table>
+
+<a class="btn btn-primary" asp-controller="Users" asp-action="Create">Add New User</a>
