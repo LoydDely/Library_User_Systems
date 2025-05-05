@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Library_User_Systems.Models.Book>
+
+@{
+	ViewData["Title"] = "Search Books";
+}
+
+<h2>Search Books</h2>
+
+<form asp-action="Search" method="get">
+	<input type="text" name="query" placeholder="Search by title..." class="form-control mb-2" />
+	<button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+@if (Model != null && Model.Any())
+{
+	<table class="table mt-3">
+		<thead>
+		<tr>
+			<th>Title</th>
+			<th>Author</th>
+			<th>Category</th>
+		</tr>
+		</thead>
+		<tbody>
+		@foreach (var book in Model)
+		{
+			<tr>
+				<td>@book.Title</td>
+				<td>@book.Author</td>
+				<td>@book.Category</td>
+			</tr>
+		}
+		</tbody>
+	</table>
+}
+else if (Model != null)
+{
+	<p>No books found.</p>
+}
